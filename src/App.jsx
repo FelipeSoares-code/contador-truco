@@ -1,14 +1,25 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Inicial from './telas/Inicial'
+import Contador from './telas/Contador'
+import PopUpVitoria from './componentes/PopUpVitoria'
+import { useApp } from './AppContext';
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const pathPadrao = "/"
   return (
     <>
       <div className=''>
+        <Router>
+          <Routes>
+            <Route path={pathPadrao} element={<Inicial />} />
+            <Route path={pathPadrao + 'contador'} element={<Contador />} />
+            <Route path="*" element={<Inicial />} /> {/* mudar futuramente */}
+          </Routes>
+        </Router>
       </div>
     </>
   )
