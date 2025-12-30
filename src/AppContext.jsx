@@ -1,6 +1,6 @@
-import { createContex, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-const AppContext = createContex()
+const AppContext = createContext()
 
 export function AppProvider({ children }) {
     const [ pathPadrao, setPathPadrao ] = useState("/")
