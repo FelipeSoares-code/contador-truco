@@ -1,12 +1,14 @@
 import { useState } from "react";
 import AreaPontos from "../componentes/AreaPontos";
+import { useApp } from "../AppContext";
 
 export default function Contador() {
 
     const txtTrucoPadrao = "Pedir Truco!"
 
-    const nome1 = "Felipe"
-    const nome2 = "sasa"
+    const { nomeGrupo1, nomeGrupo2, quantPontos, tipoTruco } = useApp()
+
+    const {nomeGrupo1: nome1, nomeGrupo2: nome2} = {nomeGrupo1, nomeGrupo2}
 
     const [naipes] = useState(() => {
         let n1, n2

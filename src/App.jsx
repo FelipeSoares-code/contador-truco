@@ -4,12 +4,22 @@ import Inicial from './telas/Inicial'
 import Contador from './telas/Contador'
 import PopUpVitoria from './componentes/PopUpVitoria'
 import { useApp } from './AppContext';
+import { AppProvider } from './AppContext'
 
 import './App.css'
 
-function App() {
 
-  const pathPadrao = "/"
+function App() {
+  return (
+    <AppProvider>
+      <InnerApp />
+    </AppProvider>
+  )
+}
+
+function InnerApp() {
+  const { pathPadrao } = useApp()
+
   return (
     <>
       <div className=''>
