@@ -12,7 +12,7 @@ export default function Contador() {
     const [valorPonto, setValorPonto] = useState(1)
 
     const { nomeGrupo1, nomeGrupo2,
-            quantPontos, tipoTruco,
+            pontosVitoria, tipoTruco,
             nomeVencedor, naipeVencedor,
             reiniciarPontos, setReiniciarPontos } = useApp()
 

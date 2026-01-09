@@ -7,7 +7,8 @@ import { useApp } from "../AppContext";
 
 export default function AreaPontos({naipeNum, nome, valorPonto, reiniciarValorTruco, vitoria}){
 
-    const { nomeVencedor, setNomeVencedor, setNaipeVencedor, reiniciarPontos, setReiniciarPontos } = useApp()
+    const { setNomeVencedor, setNaipeVencedor,
+            reiniciarPontos, setReiniciarPontos, pontosVitoria } = useApp()
 
     const naipes = [
         (<NaipeOuros className="text-red-700"/>),
@@ -21,7 +22,7 @@ export default function AreaPontos({naipeNum, nome, valorPonto, reiniciarValorTr
     const [pontos, setPontos] = useState(0)
 
     useEffect(() => {
-        if(pontos ==  12) {
+        if(pontos ==  pontosVitoria) {
             setNomeVencedor(nome)
             setNaipeVencedor(naipeNum)
             vitoria()
@@ -40,7 +41,7 @@ export default function AreaPontos({naipeNum, nome, valorPonto, reiniciarValorTr
         const novoValor = pontos + (valorPonto * operador)
         
         if (operador == 1)
-            setPontos(novoValor > 12 ? 12 : novoValor)
+            setPontos(novoValor > pontosVitoria ? pontosVitoria : novoValor)
         else
             setPontos(novoValor < 0 ? 0 : novoValor)
         

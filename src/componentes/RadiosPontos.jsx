@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useApp } from "../AppContext"
 
 export default function RadiosPontos() {
     const [pontosParaVitoria, setPontosParaVitoria] = useState(12)
 
-    const { setQuantPontos } = useApp()
+    const { setPontosVitoria } = useApp()
+
+    useEffect(() => setPontosVitoria(pontosParaVitoria), [pontosParaVitoria])
 
     const estiloLabelRadio = "cursor-pointer px-4 py-2 text-sm font-bold bg-[var(--color-cinza-claro)] text-gray-300 peer-checked:bg-red-700 peer-checked:text-white transition"
 

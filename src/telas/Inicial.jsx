@@ -18,8 +18,10 @@ export default function Inicial() {
     const { setNomeGrupo1, setNomeGrupo2, setTipoTruco } = useApp()
 
     const iniciar = () => {
-        setNomeGrupo1(refNome1.current.value)
-        setNomeGrupo2(refNome2.current.value)
+        const nome1 = refNome1.current.value
+        const nome2 = refNome2.current.value
+        setNomeGrupo1(nome1 != [] ? nome1 : "Grupo 1")
+        setNomeGrupo2(nome2 != [] ? nome2 : "Grupo 2")
         setTipoTruco(modoJogo)
 
         navigate("/contador")
