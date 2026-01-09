@@ -3,8 +3,11 @@ import { FaHeart as NaipeCopas } from "react-icons/fa6";
 import { BsSuitSpadeFill as NaipeEspadas } from "react-icons/bs";
 import { FaDiamond as NaipeOuros } from "react-icons/fa6";
 import { useState, useEffect } from "react";
+import { useApp } from "../AppContext";
 
-export default function AreaPontos({naipeNum, nome, valorPonto, reiniciarValorTruco}){
+export default function AreaPontos({naipeNum, reiniciarPontos, nome, valorPonto, reiniciarValorTruco, vitoria}){
+
+    const { nomeVencedor, setNomeVencedor, setNaipeVencedor } = useApp()
 
     const naipes = [
         (<NaipeOuros className="text-red-700"/>),
@@ -17,7 +20,15 @@ export default function AreaPontos({naipeNum, nome, valorPonto, reiniciarValorTr
 
     const [pontos, setPontos] = useState(0)
 
-    const mudarValorPonto = (operador) => {
+    useEffect(() => {
+        if(pontos ==  12) {
+            setNomeVencedor(nome)
+            setNaipeVencedor(naipeNum)
+            vitoria()
+        } 
+    }, [pontos])
+
+    const mudarPonto = (operador) => {
         operador = operador < 0 ? -1 : 1
         const novoValor = pontos + (valorPonto * operador)
         
@@ -25,7 +36,7 @@ export default function AreaPontos({naipeNum, nome, valorPonto, reiniciarValorTr
             setPontos(novoValor > 12 ? 12 : novoValor)
         else
             setPontos(novoValor < 0 ? 0 : novoValor)
-            
+        
         reiniciarValorTruco()
     }
 
@@ -37,12 +48,12 @@ export default function AreaPontos({naipeNum, nome, valorPonto, reiniciarValorTr
             </div>
             <div className="flex flex-row justify-between items-center">
                 <button className="w-[100%] h-[100%] text-sm" 
-                    onClick={() => mudarValorPonto(-1)}
+                    onClick={() => mudarPonto(-1)}
                 >-{valorPonto}</button>
 
                 <span className="text-[100px]">{pontos}</span>
                 <button className="w-[100%] h-[100%] text-sm" 
-                    onClick={() => mudarValorPonto(1)}
+                    onClick={() => mudarPonto(1)}
                 >+{valorPonto}</button>
             </div>
         </>
