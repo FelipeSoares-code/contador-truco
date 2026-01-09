@@ -37,9 +37,9 @@ export default function Inicial() {
                 <h1 className="m-auto text-[30px] font-bold">Contador de Truco</h1>
                 <div className={"flex flex-row justify-center gap-3"}>
                     <NaipeOuros className={`${estiloNaipe} text-red-700`} />
-                    <NaipeEspadas className={`${estiloNaipe} text-gray-300`} />
+                    <NaipeEspadas className={`${estiloNaipe} text-blue-200`} />
                     <NaipeCopas className={`${estiloNaipe} text-red-700`} />
-                    <NaipePaus className={`${estiloNaipe} text-gray-300`} />
+                    <NaipePaus className={`${estiloNaipe} text-blue-200`} />
                 </div>
                 <hr className="mt-5"/>
             </div>

@@ -8,9 +8,9 @@ export default function AreaPontos({naipeNum, nome, valorPonto, reiniciarValorTr
 
     const naipes = [
         (<NaipeOuros className="text-red-700"/>),
-        (<NaipeEspadas/>),
+        (<NaipeEspadas className="text-blue-200"/>),
         (<NaipeCopas className="text-red-700"/>),
-        (<NaipePaus/>)
+        (<NaipePaus className="text-blue-200"/>)
     ]
 
     const [selectedNaipe, setSelectedNaipe] = useState(naipes[naipeNum])
@@ -18,11 +18,14 @@ export default function AreaPontos({naipeNum, nome, valorPonto, reiniciarValorTr
     const [pontos, setPontos] = useState(0)
 
     const mudarValorPonto = (operador) => {
-        if (operador == 1 && pontos < 12) 
-            setPontos(pontos + valorPonto)
-        else if(operador == -1 && pontos > 0)
-            setPontos(pontos - valorPonto)
-
+        operador = operador < 0 ? -1 : 1
+        const novoValor = pontos + (valorPonto * operador)
+        
+        if (operador == 1)
+            setPontos(novoValor > 12 ? 12 : novoValor)
+        else
+            setPontos(novoValor < 0 ? 0 : novoValor)
+            
         reiniciarValorTruco()
     }
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AreaPontos from "../componentes/AreaPontos";
 import { useApp } from "../AppContext";
+import PopUpVitoria from "../componentes/PopUpVitoria";
 
 export default function Contador() {
 
@@ -10,13 +11,17 @@ export default function Contador() {
 
     const {nomeGrupo1: nome1, nomeGrupo2: nome2} = {nomeGrupo1, nomeGrupo2}
 
+    const [nomeVencedor, setNomeVencedor] = useState(null)
+
+    const [naipeVencedor, setNaipeVencedor] = useState(1)
+
     const [naipes] = useState(() => {
         let n1, n2
 
         do {
             n1 = Math.floor(Math.random() * 4)
             n2 = Math.floor(Math.random() * 4)
-        } while (n1 === n2)
+        } while (n1 === n2 || ((n1 + n2) % 2 == 0) )
 
         return { n1, n2 }
     });
@@ -51,8 +56,21 @@ export default function Contador() {
         }
     }
 
+    const [popupOpen, setPopupOpen] = useState(true)
+
+    const fecharPopup = () => {
+        reiniciarValorTruco()
+
+        setPopupOpen(false)
+    }
+
     return(
         <section className="h-screen px-3 py-5 flex flex-col justify-between">
+            <PopUpVitoria 
+                open={popupOpen} close={() => fecharPopup()} 
+                nome={nomeVencedor} naipeNum={naipeVencedor} 
+            />
+
             <AreaPontos naipeNum={naipe1} nome={nome1} 
                 valorPonto={valorPonto} 
                 reiniciarValorTruco={() => {

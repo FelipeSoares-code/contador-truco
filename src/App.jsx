@@ -1,8 +1,6 @@
-import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Inicial from './telas/Inicial'
 import Contador from './telas/Contador'
-import PopUpVitoria from './componentes/PopUpVitoria'
 import { useApp } from './AppContext';
 import { AppProvider } from './AppContext'
 
