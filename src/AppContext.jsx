@@ -10,6 +10,7 @@ export function AppProvider({ children }) {
     const [ tipoTruco, setTipoTruco ] = useState('paulista')
     const [ nomeVencedor, setNomeVencedor ] = useState(null)
     const [ naipeVencedor, setNaipeVencedor ] = useState(null)
+    const [reiniciarPontos, setReiniciarPontos] = useState(false)
 
     return (
         <AppContext.Provider
@@ -20,7 +21,8 @@ export function AppProvider({ children }) {
                 quantPontos, setQuantPontos,
                 tipoTruco, setTipoTruco,
                 nomeVencedor, setNomeVencedor,
-                naipeVencedor, setNaipeVencedor
+                naipeVencedor, setNaipeVencedor,
+                reiniciarPontos, setReiniciarPontos
             }}
         >
             {children}

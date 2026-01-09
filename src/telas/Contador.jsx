@@ -10,9 +10,11 @@ export default function Contador() {
     const [popupOpen, setPopupOpen] = useState(false)
     const [txtTruco, setTxtTruco] = useState(txtTrucoPadrao)
     const [valorPonto, setValorPonto] = useState(1)
-    const [pontoPadrao, setPontoPadrao] = useState(0)
 
-    const { nomeGrupo1, nomeGrupo2, quantPontos, tipoTruco, nomeVencedor, naipeVencedor } = useApp()
+    const { nomeGrupo1, nomeGrupo2,
+            quantPontos, tipoTruco,
+            nomeVencedor, naipeVencedor,
+            reiniciarPontos, setReiniciarPontos } = useApp()
 
     const {nomeGrupo1: nome1, nomeGrupo2: nome2} = {nomeGrupo1, nomeGrupo2}
 
@@ -55,8 +57,7 @@ export default function Contador() {
     }
 
     const fecharPopup = () => {
-        setPontoPadrao(0)
-
+        setReiniciarPontos(true)
         setPopupOpen(false)
     }
 
@@ -73,7 +74,7 @@ export default function Contador() {
                     setValorPonto(1)
                     setTxtTruco(txtTrucoPadrao)
                 }}
-                vitoria={() => setPopupOpen(true)} 
+                vitoria={() => setPopupOpen(true)}
             />
 
             <div className="flex flex-row justify-between items-center">

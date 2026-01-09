@@ -5,9 +5,9 @@ import { FaDiamond as NaipeOuros } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import { useApp } from "../AppContext";
 
-export default function AreaPontos({naipeNum, reiniciarPontos, nome, valorPonto, reiniciarValorTruco, vitoria}){
+export default function AreaPontos({naipeNum, nome, valorPonto, reiniciarValorTruco, vitoria}){
 
-    const { nomeVencedor, setNomeVencedor, setNaipeVencedor } = useApp()
+    const { nomeVencedor, setNomeVencedor, setNaipeVencedor, reiniciarPontos, setReiniciarPontos } = useApp()
 
     const naipes = [
         (<NaipeOuros className="text-red-700"/>),
@@ -27,6 +27,13 @@ export default function AreaPontos({naipeNum, reiniciarPontos, nome, valorPonto,
             vitoria()
         } 
     }, [pontos])
+
+    useEffect(() => {
+        if (reiniciarPontos) {
+            setPontos(0)
+            setReiniciarPontos(false)
+        }
+    }, [reiniciarPontos])
 
     const mudarPonto = (operador) => {
         operador = operador < 0 ? -1 : 1
