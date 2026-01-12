@@ -3,14 +3,14 @@ import { createContext, useContext, useState } from "react";
 const AppContext = createContext()
 
 export function AppProvider({ children }) {
-    const [ pathPadrao, setPathPadrao ] = useState("/")
+    const [ pathPadrao, setPathPadrao ] = useState("/contador-truco")
     const [ nomeGrupo1, setNomeGrupo1 ] = useState("Grupo 1")
     const [ nomeGrupo2, setNomeGrupo2 ] = useState("Grupo 2")
     const [ pontosVitoria, setPontosVitoria ] = useState(12)
     const [ tipoTruco, setTipoTruco ] = useState('paulista')
     const [ nomeVencedor, setNomeVencedor ] = useState(null)
     const [ naipeVencedor, setNaipeVencedor ] = useState(null)
-    const [reiniciarPontos, setReiniciarPontos] = useState(false)
+    const [ reiniciarPontos, setReiniciarPontos ] = useState(false)
 
     return (
         <AppContext.Provider

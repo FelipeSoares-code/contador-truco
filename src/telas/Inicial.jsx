@@ -15,7 +15,7 @@ export default function Inicial() {
     const refNome1 = useRef(null)
     const refNome2 = useRef(null)
 
-    const { setNomeGrupo1, setNomeGrupo2, setTipoTruco } = useApp()
+    const { setNomeGrupo1, setNomeGrupo2, setTipoTruco, pathPadrao } = useApp()
 
     const iniciar = () => {
         const nome1 = refNome1.current.value
@@ -24,7 +24,7 @@ export default function Inicial() {
         setNomeGrupo2(nome2 != [] ? nome2 : "Grupo 2")
         setTipoTruco(modoJogo)
 
-        navigate("/contador")
+        navigate(pathPadrao + "/contador")
     }
 
     const [modoJogo, setModoJogo] = useState('paulista')
