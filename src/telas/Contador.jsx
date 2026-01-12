@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AreaPontos from "../componentes/AreaPontos";
 import { useApp } from "../AppContext";
 import PopUpVitoria from "../componentes/PopUpVitoria";
@@ -7,14 +7,13 @@ export default function Contador() {
 
     const txtTrucoPadrao = "Pedir Truco!"
 
+    const { nomeGrupo1, nomeGrupo2,
+            nomeVencedor, naipeVencedor, 
+            setReiniciarPontos, tipoTruco } = useApp()
+
     const [popupOpen, setPopupOpen] = useState(false)
     const [txtTruco, setTxtTruco] = useState(txtTrucoPadrao)
-    const [valorPonto, setValorPonto] = useState(1)
-
-    const { nomeGrupo1, nomeGrupo2,
-            pontosVitoria, tipoTruco,
-            nomeVencedor, naipeVencedor,
-            reiniciarPontos, setReiniciarPontos } = useApp()
+    const [valorPonto, setValorPonto] = useState(tipoTruco === 'paulista' ? 1 : 2)
 
     const {nomeGrupo1: nome1, nomeGrupo2: nome2} = {nomeGrupo1, nomeGrupo2}
 
@@ -31,29 +30,79 @@ export default function Contador() {
 
     const { n1: naipe1, n2: naipe2 } = naipes;
 
-    const trocarValorPonto = (valor) => {
+    const trocarValorPonto = (valor, correr = false) => {
+        const txtCorreu = "Correu!"
+        if (txtTruco == txtCorreu) return
+
         switch(valor) {
             case 1:
                 setTxtTruco("Pedir 6!")
                 setValorPonto(3)
                 break;
+            case 2:
+                setTxtTruco("Pedir 6!")
+                setValorPonto(4)
+                break;
             case 3:
+                if (correr) {
+                    setTxtTruco(txtCorreu)
+                    setValorPonto(1)
+                    break
+                }
                 setTxtTruco("Pedir 9!")
                 setValorPonto(6)
                 break;
+            case 4:
+                if (correr) {
+                    setTxtTruco(txtCorreu)
+                    setValorPonto(2)
+                    break
+                }
+                setTxtTruco("Pedir 10!")
+                setValorPonto(6)
+                break;
             case 6:
+                if (correr) {
+                    setTxtTruco(txtCorreu)
+                    setValorPonto(tipoTruco === "paulista" ? 3 : 4)
+                    break
+                }
                 setTxtTruco("Pedir 12!")
-                setValorPonto(9)
+                setValorPonto(tipoTruco === "paulista" ? 9 : 10)
                 break; 
             case 9:
-                setTxtTruco("Desistir")
+                if (correr) {
+                    setTxtTruco(txtCorreu)
+                    setValorPonto(6)
+                    break
+                }
+                setTxtTruco("Zerar")
                 setValorPonto(12)
                 break;
+            case 10:
+                if (correr) {
+                    setTxtTruco(txtCorreu)
+                    setValorPonto(6)
+                    break
+                }
+                setTxtTruco("Zerar")
+                setValorPonto(12)
+                break;
+            case 12:
+                if (correr) {
+                    setTxtTruco(txtCorreu)
+                    setValorPonto(9)
+                    break
+                }
             default:
-                setTxtTruco(txtTrucoPadrao)    
-                setValorPonto(1)
+                reiniciarValorTruco()
                 break;   
         }
+    }
+
+    const reiniciarValorTruco = () => {
+        setValorPonto(tipoTruco === 'paulista' ? 1 : 2)
+        setTxtTruco(txtTrucoPadrao)
     }
 
     const fecharPopup = () => {
@@ -70,10 +119,7 @@ export default function Contador() {
 
             <AreaPontos naipeNum={naipe1} nome={nome1} 
                 valorPonto={valorPonto} 
-                reiniciarValorTruco={() => {
-                    setValorPonto(1)
-                    setTxtTruco(txtTrucoPadrao)
-                }}
+                reiniciarValorTruco={() => reiniciarValorTruco()}
                 vitoria={() => setPopupOpen(true)}
             />
 
@@ -82,15 +128,18 @@ export default function Contador() {
                 <button className="text-[25px] w-150 h-12 bg-black mx-1 font-medium"
                     onClick={() => trocarValorPonto(valorPonto)}
                 >{txtTruco}</button>
+
+                {((valorPonto >= 3 && valorPonto < 13) && (txtTruco != "Correu!")) && 
+                <button className="text-[25px] w-150 h-12 bg-black mx-1 font-medium"
+                    onClick={() => trocarValorPonto(valorPonto, true)}
+                >Correr!</button>}
+
                 <hr className="w-[100%]" />
             </div>
 
             <AreaPontos naipeNum={naipe2} nome={nome2} 
                 valorPonto={valorPonto} 
-                reiniciarValorTruco={() => {
-                    setValorPonto(1)
-                    setTxtTruco(txtTrucoPadrao)
-                }}
+                reiniciarValorTruco={() => reiniciarValorTruco()}
                 vitoria={() => setPopupOpen(true)}
             />
 
