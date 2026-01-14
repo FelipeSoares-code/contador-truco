@@ -24,7 +24,7 @@ export default function Inicial() {
         setNomeGrupo2(nome2 != [] ? nome2 : "Grupo 2")
         setTipoTruco(modoJogo)
 
-        navigate(pathPadrao + "/contador")
+        navigate("/contador")
     }
 
     const [modoJogo, setModoJogo] = useState('paulista')

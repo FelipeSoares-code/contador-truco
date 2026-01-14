@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Inicial from './telas/Inicial'
 import Contador from './telas/Contador'
 import Erro404 from './telas/Erro404'
@@ -25,8 +25,8 @@ function InnerApp() {
         <Router>
           <Routes>
             <Route path={pathPadrao} element={<Inicial />} />
-            <Route path={`${pathPadrao}/contador`} element={<Contador />} />
-            <Route path="*" element={<Erro404 />} /> {/* mudar futuramente */}
+            <Route path="/contador" element={<Contador />} />
+            <Route path="*" element={<Erro404 />} />
           </Routes>
         </Router>
       </div>
